@@ -19,7 +19,7 @@ router.post('/login', validacaoLogin.validateLogin, validacaoJWT.verifyJWT, logi
 
 /*router.post('/logout', validacaoLogin.validateLogin , loginController.realizarlogout);*/
  
-router.get('/usuarios', validacaoJWT.verifyJWT, usuariosController.getAllUsuarios);
+router.get('/usuarios', /*validacaoJWT.verifyJWT,*/ usuariosController.getAllUsuarios);
 router.post('/usuarios', validacaoJWT.verifyJWT, validacaoUsuarios.validateNovoUsuario, usuariosController.createUsuario);
 router.delete('/usuarios/:id', validacaoJWT.verifyJWT, usuariosController.deleteUsuario);
 router.put('/usuarios/:id', validacaoJWT.verifyJWT, usuariosController.updateUsuario);
