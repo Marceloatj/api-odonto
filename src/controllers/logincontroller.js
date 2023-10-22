@@ -7,18 +7,18 @@ const jwt = require('jsonwebtoken');
 
 const autenticacaoLogin = async (req, res) => {
   
-  const { email, senha } = req.body;
+  const { EMAIL, SENHA } = req.body;
 
   // verifica se existe o login
-  const user = await loginRepo.checkloginExists(email);
+  const user = await loginRepo.checkloginExists(EMAIL);
 
   if (!user) {
-      logger.error(`autenticacaoLogin - Usuário não encontrado! email=${email}`);
+      logger.error(`autenticacaoLogin - Usuário não encontrado! email=${EMAIL}`);
     return res.status(404).json({ msg: "Usuário não encontrado!" });
   }
 
   // verifica se a senha esta correta
-  const checkPassword = await bcrypt.compare(senha, user.senha);
+  const checkPassword = await bcrypt.compare(SENHA, user.senha);
 
   if (!checkPassword) {
       logger.error('autenticacaoLogin - Senha inválida!');
@@ -26,14 +26,21 @@ const autenticacaoLogin = async (req, res) => {
   }
 
     //auth ok
-    const id = user.id;
+    const id = user.idusuario;
     const token = jwt.sign(
       { id }, 
       process.env.SECRET, 
-      { expiresIn: 600 } // expira em 10 minutos
+      { expiresIn: 3000 } // expira em 1 hora
     );
 
-  res.status(200).json({ msg: "Autenticação realizada com sucesso!", auth: true, token: token });
+  res.status(200).json({ 
+    msg: "Autenticação realizada com sucesso!", 
+    auth: true, 
+    token: token,
+    IDUSUARIO: user.idconta,
+    NOME: user.nome,
+    PERFIL: user.perfil
+   });
 
   
 };

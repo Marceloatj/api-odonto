@@ -7,12 +7,12 @@ const validateLogin = (request, response, next) => {
     logger.info(`Solicitação autenticação de login`);
 
     // validations
-    if (!body.email) {
+    if (!body.EMAIL) {
         logger.error('ValidateRegister - O email é obrigatório!');
         return res.status(422).json({ msg: "O email é obrigatório!" });
     }
 
-    if (!body.senha) {
+    if (!body.SENHA) {
         logger.error('ValidateRegister - A senha é obrigatória!');
         return res.status(422).json({ msg: "A senha é obrigatória!" });
     }

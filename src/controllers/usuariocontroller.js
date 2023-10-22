@@ -22,9 +22,7 @@ const createUsuario = async (request, response) => {
 const deleteUsuario = async (request, response) => {
   logger.info('Requisição DELETE recebida');
 
-  const { id } = request.params;
-
-  await usuaRepo.deletarUsuario(id);
+  await usuaRepo.deletarUsuario(request.body);
 
   return response.status(204).json();
 };
@@ -32,9 +30,7 @@ const deleteUsuario = async (request, response) => {
 const updateUsuario = async (request, response) => {
   logger.info('Requisição PUT recebida');
 
-  const { id } = request.params;
-
-  await usuaRepo.atualizarUsuario(id, request.body);
+  await usuaRepo.atualizarUsuario(request.body);
 
   return response.status(204).json();
 };

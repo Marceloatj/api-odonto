@@ -5,7 +5,7 @@ const connection = require('../infra/connection');
 
 const checkloginExists = async (email) => {
 
-    const query = 'SELECT * FROM usuarios where email = ?';
+    const query = 'SELECT * FROM usuario where email = ?';
 
     const [usu] = await connection.execute(query, [email]);
     return usu[0];
